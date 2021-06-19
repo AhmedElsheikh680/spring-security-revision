@@ -18,13 +18,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth
              .inMemoryAuthentication()
              .withUser("ahmed")
-             .password(passwordEncoder().encode("ahmed123")).roles("ADMIN")
-             .authorities("ACCESS_BASIC1")
+             .password(passwordEncoder().encode("ahmed123"))
+//             .roles("ADMIN")
+             .authorities("ACCESS_BASIC1", "ROLE_ADMIN")
              .and()
              .withUser("yasser")
              .password(passwordEncoder()
-             .encode("yasser123")).roles("MANAGER")
-             .authorities("ACCESS_BASIC2")
+             .encode("yasser123"))
+//             .roles("MANAGER")
+             .authorities("ACCESS_BASIC2", "ROLE_MANAGER")
              .and()
              .withUser("kareem").password(passwordEncoder().encode("kareem123")).roles("USER");
     }
@@ -36,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .anyRequest().authenticated()
                 .antMatchers("/api/v1/main").permitAll()
                 .antMatchers("/api/v1/profile").authenticated()
-                .antMatchers("/api/v1/admin").hasRole("ADMIN")
+                .antMatchers("/api/v1/admin/**").hasRole("ADMIN")
                 .antMatchers("/api/v1/management").hasAnyRole("ADMIN", "MANAGER")
                 .antMatchers("api/v1/basic/mybasic").hasAuthority("ACCESS_BASIC1")
                 .antMatchers("/api/v1/basic/allbasic").hasAuthority("ACCESS_BASIC2")

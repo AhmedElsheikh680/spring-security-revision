@@ -26,10 +26,7 @@ public class UserPrinciple implements UserDetails {
             GrantedAuthority authority = new SimpleGrantedAuthority(p.getAuthorize());
             authorities.add(authority);
         });
-        this.user.getRoles().forEach(p -> {
-            GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_"+p.getRoleName());
-            authorities.add(authority);
-        });
+
         return authorities;
     }
 

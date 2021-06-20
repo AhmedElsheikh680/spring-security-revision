@@ -53,7 +53,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/basic/allbasic").hasAuthority("ACCESS_BASIC2")
                 .and()
                 .formLogin()
-                .loginPage("/api/v1/login");
+                .loginProcessingUrl("/signin")
+                .loginPage("/api/v1/login")
+                .usernameParameter("user")
+                .passwordParameter("pass");
 //                .httpBasic();
     }
 
